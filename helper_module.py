@@ -18,11 +18,11 @@ train['log_SalePrice'] = np.log(train['SalePrice'])
 def look_cat(varlist):
     for var in varlist:
         data = pd.concat([train['log_SalePrice'], train[var]], axis=1)
-        #info about missingness
+        #info about missingness and value counts
         num_miss = data[var].isnull().sum()
         pct_miss = round(num_miss/data.shape[0]*100, 2)
         print(var + ' has ' + str(num_miss) + ' missing observations, equal to ' + str(pct_miss) + '%')
-        #print(var + ' values are ' + str(train[var].unique()))
+        print(train[var].value_counts())
         
          #Figures
         sns.set_theme(style="whitegrid")
@@ -32,7 +32,7 @@ def look_cat(varlist):
         f, ax = plt.subplots(figsize = (6,4))
         fig1 = sns.countplot(x=data[var],
                       data=data,
-                     order = list(med[var]))
+                     order = list(med[var]));
         fig1.set(xlabel = var, ylabel = 'Count')
         
         
@@ -53,6 +53,7 @@ def look_num(varlist):
         num_miss = train[var].isnull().sum()
         pct_miss = round(num_miss/train.shape[0]*100, 2)
         print(var + ' has ' + str(num_miss) + ' missing observations, equal to ' + str(pct_miss) + '%')
+        print(train[var].describe())
         
         #info about pearson's correlation
         #corr = pearsonr(train[var], train['log_SalePrice'])
@@ -64,7 +65,7 @@ def look_num(varlist):
         #seaborn Histogram
         f, ax = plt.subplots(figsize = (6,4))
         fig1 = sns.histplot(x=var,
-                      data=train)
+                      data=train);
         fig1.set(xlabel = var, ylabel = 'Count')
         
         #seaborn Scatterplot
