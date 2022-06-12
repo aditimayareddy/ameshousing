@@ -10,26 +10,28 @@ from sklearn.preprocessing import StandardScaler
 import statsmodels.api as sm
 from statsmodels.formula.api import ols
 #Functions needed
-    
+
+train = pd.read_csv('./data/raw/train.csv')
+train['log_SalePrice'] = np.log(train['SalePrice'])
 
 #Function to help quickly look at a variable list of categorical features. For each feature, function gives number of missing values, pct of missing values, countplot and boxplot.
 def look_cat(varlist):
     for var in varlist:
-        count = train[var].value_counts()
+        data = pd.concat([train['log_SalePrice'], train[var]], axis=1)
         #info about missingness
-        num_miss = train[var].isnull().sum()
-        pct_miss = round(num_miss/train.shape[0]*100, 2)
+        num_miss = data[var].isnull().sum()
+        pct_miss = round(num_miss/data.shape[0]*100, 2)
         print(var + ' has ' + str(num_miss) + ' missing observations, equal to ' + str(pct_miss) + '%')
         #print(var + ' values are ' + str(train[var].unique()))
         
-        #Figures
+         #Figures
         sns.set_theme(style="whitegrid")
-        med = train.groupby([var])['log_SalePrice'].median().sort_values(ascending = False).reset_index()
-
-        #seaborn Count Plot
+        med = data.groupby([var])['log_SalePrice'].median().sort_values(ascending = False).reset_index()
+        
+         #seaborn Count Plot
         f, ax = plt.subplots(figsize = (6,4))
-        fig1 = sns.countplot(x=train[var],
-                      data=train,
+        fig1 = sns.countplot(x=data[var],
+                      data=data,
                      order = list(med[var]))
         fig1.set(xlabel = var, ylabel = 'Count')
         
@@ -38,12 +40,11 @@ def look_cat(varlist):
         fig = sns.boxplot(x=var,
                           y = 'log_SalePrice',
                           order = list(med[var]),
-                          data=train);
+                          data=data);
         plt.xticks(rotation=45)
         fig.set(xlabel=var, ylabel='Log of Sale Price')
         
         yield fig
-        
 #Function to help quickly look at a variable list of numerical features. For each feature, function gives number of missing values, pct of missing values, histogram and scatterplot.
 def look_num(varlist):
     for var in varlist:
