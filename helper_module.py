@@ -9,8 +9,8 @@ from scipy.stats import pearsonr
 from sklearn.preprocessing import StandardScaler
 import statsmodels.api as sm
 from statsmodels.formula.api import ols
-#Functions needed
 
+#Functions needed
 train = pd.read_csv('./data/raw/train.csv')
 train['log_SalePrice'] = np.log(train['SalePrice'])
 
@@ -111,3 +111,26 @@ def look_num2(varlist):
         fig.set(xlabel=var, ylabel='Log of Sale Price')
         
         yield fig
+'''        
+#Function to help visualize missing values
+def help_missing(title = 'Features with missing values'):
+    num_missing = train.isnull().sum().sort_values(ascending = False)
+    pct = (train.isnull().sum()/train.isnull().count()).sort_values(ascending=False)
+    df_md = pd.concat([num, pct], axis=1, keys=['Number', 'Percent'])
+    
+    #filtering for only the variables where there is 1 or more missing observations
+    df_md.columns
+    df_md = df_md.loc[df_md.Number > 0]
+    has_missing = df_md['Number']
+    
+    #Making a chart
+    fig, ax = plt.subplots()
+    has_missing.plot.bar()
+    p = ax.bar(x = has_missing.index, height = has_missing.values) 
+    bottom, top = ax.get_ylim()
+    ax.set_ylim(top = top*1.05)
+    plt.title(title)
+    fig = plt.gcf()
+    fig.set_size_inches(len(num)/2, 4)
+    plt.show()
+    return df_md'''
