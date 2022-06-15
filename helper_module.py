@@ -45,6 +45,8 @@ def look_cat(varlist):
         fig.set(xlabel=var, ylabel='Log of Sale Price')
         
         yield fig
+        
+        
 #Function to help quickly look at a variable list of numerical features. For each feature, function gives number of missing values, pct of missing values, histogram and scatterplot.
 def look_num(varlist):
     for var in varlist:
@@ -58,6 +60,38 @@ def look_num(varlist):
         #info about pearson's correlation
         #corr = pearsonr(train[var], train['log_SalePrice'])
         #print('Pearsons correlation (r):', round(corr[0],3))
+        
+        #Figures
+        sns.set_theme(style="whitegrid")
+
+        #seaborn Histogram
+        f, ax = plt.subplots(figsize = (6,4))
+        fig1 = sns.histplot(x=var,
+                      data=train);
+        fig1.set(xlabel = var, ylabel = 'Count')
+        
+        #seaborn Scatterplot
+        f, ax = plt.subplots(figsize = (6,4))
+        fig = sns.scatterplot(x=var,
+                          y = 'log_SalePrice',
+                          data=train);
+        plt.xticks(rotation=45)
+        fig.set(xlabel=var, ylabel='Log of Sale Price')
+        
+        yield fig
+        
+#Function for second pass in-depth look at numerical features
+def look_num2(varlist):
+    for var in varlist:
+        
+        #info about missingness
+        num_miss = train[var].isnull().sum()
+        pct_miss = round(num_miss/train.shape[0]*100, 2)
+        print(train[var].describe())
+        
+        #info about pearson's correlation
+        corr = pearsonr(train[var], train['log_SalePrice'])
+        print('Pearsons correlation (r):', round(corr[0],3))
         
         #Figures
         sns.set_theme(style="whitegrid")
