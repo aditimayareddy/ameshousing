@@ -34,11 +34,10 @@ For Tree-based models, features were selected using Lasso Regression.
 
 ## Code
 * The code for this project is split across the following notebooks as follows:
-  * `I. EDA & Cleaning` contains linear regression, elastic-net, interest rate, and backpropagation files
-  * `II. Feature Engineering & Preprocessing` contains tree-based and SVR files
-  * `III. Modeling & Evaluation` contains data cleaning, feature engineering, school district generation, and linear regression files
-  * `helper_module` contains time series files
-  * All of the above contain EDA as well
+  * `I. EDA & Cleaning` contains data cleaning, and exploratory analysis
+  * `II. Feature Engineering & Preprocessing` contains feature engineering, preprocessing, Lasso Regression code
+  * `III. Modeling & Evaluation` contains model fitting and evaluation code
+  * `helper_module` contains functions to help with EDA and model evaluation
 * Data (provided and generated) is in `data`
 * Figures for presentation are in `figures`
 
