@@ -34,9 +34,9 @@ For Tree-based models, features were selected using Lasso Regression.
 
 ## Code
 * The code for this project is split across the following notebooks as follows:
-  * `I. EDA & Cleaning` contains data cleaning, and exploratory analysis
-  * `II. Feature Engineering & Preprocessing` contains feature engineering, preprocessing, Lasso Regression code
-  * `III. Modeling & Evaluation` contains model fitting and evaluation code
+  * `I. EDA & Cleaning` contains data cleaning, exploratory analysis, and first round feature engineering
+  * `II. Feature Selection & Preprocessing` contains second round feature engineering, preprocessing, Lasso Regression code for feature selection
+  * `III. Modeling & Evaluation` contains model fitting and evaluation code for linear and tree-based models
   * `helper_module` contains functions to help with EDA and model evaluation
 * Data (provided and generated) is in `data`
 * Figures for presentation are in `figures`

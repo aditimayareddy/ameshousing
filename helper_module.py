@@ -78,39 +78,6 @@ def look_num(varlist):
         #info about missingness
         num_miss = train[var].isnull().sum()
         pct_miss = round(num_miss/train.shape[0]*100, 2)
-        print(var + ' has ' + str(num_miss) + ' missing observations, equal to ' + str(pct_miss) + '%')
-        print(train[var].describe())
-        
-        #info about pearson's correlation
-        #corr = pearsonr(train[var], train['log_SalePrice'])
-        #print('Pearsons correlation (r):', round(corr[0],3))
-        
-        #Figures
-        sns.set_theme(style="whitegrid")
-
-        #seaborn Histogram
-        f, ax = plt.subplots(figsize = (6,4))
-        fig1 = sns.histplot(x=var,
-                      data=train);
-        fig1.set(xlabel = var, ylabel = 'Count')
-        
-        #seaborn Scatterplot
-        f, ax = plt.subplots(figsize = (6,4))
-        fig = sns.scatterplot(x=var,
-                          y = 'log_SalePrice',
-                          data=train);
-        plt.xticks(rotation=45)
-        fig.set(xlabel=var, ylabel='Log of Sale Price')
-        
-        yield fig
-        
-#Function for second pass in-depth look at numerical features
-def look_num(varlist):
-    for var in varlist:
-        
-        #info about missingness
-        num_miss = train[var].isnull().sum()
-        pct_miss = round(num_miss/train.shape[0]*100, 2)
         print(train[var].describe())
         print('*'*50)
             
@@ -129,7 +96,7 @@ def look_num(varlist):
         plt.xticks(rotation = 45)
         
         #seaborn Scatterplot
-        sns.scatterplot(x=var, y = 'log_SalePrice', data=train, ax = ax[1])
+        sns.scatterplot(x=var, y = 'SalePrice', data=train, ax = ax[1])
         plt.xticks(rotation=45)
         
         yield f.show()
