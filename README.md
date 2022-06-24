@@ -27,18 +27,17 @@ This project aims to create business value for real estate agents, buyers, selle
 ### Model Validation and Feature Selection
 For linear regression, features were selected if they were:
 * significant (p-values)
-* not multicolinear (did not inflate VIF of another feature)
+* not multicolinear (did not inflate VIF of other features)
 
 For Tree-based models, features were selected using Lasso Regression.
 
 
 ## Code
-* The code for this project is split across the following notebooks as follows:
-  * `I. EDA & Cleaning` contains data cleaning, exploratory analysis, and first round feature engineering
-  * `II. Feature Selection & Preprocessing` contains second round feature engineering, preprocessing, Lasso Regression code for feature selection
-  * `III. Modeling & Evaluation` contains model fitting and evaluation code for linear and tree-based models
+* The code for this project is split across the following notebooks:
+  * `I. EDA & Feature Engineering` contains data cleaning, exploratory analysis, and first round feature engineering
+  * `II. Preprocessing, Modeling and Evaluation` contains second round feature engineering/selection, preprocessing, model fitting and evaluation code for linear and tree-based models.
   * `helper_module` contains functions to help with EDA and model evaluation
-* Data (provided and generated) is in `data`
+* Data (raw and generated) is in `data`
 * Figures for presentation are in `figures`
 
     
