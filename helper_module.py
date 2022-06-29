@@ -28,7 +28,8 @@ def help_missing(dataset, title = 'Features with missing values'):
     #Making a chart
     fig, ax = plt.subplots()
     has_missing.plot.bar()
-    p = ax.bar(x = has_missing.index, height = has_missing.values, color = 'teal' ) 
+    p = ax.bar(x = has_missing.index, height = has_missing.values, color = 'teal' )
+    #ax.bar_label(p, has_missing.values, label_type = 'center')
     bottom, top = ax.get_ylim()
     ax.set_ylim(top = top*1.05)
     plt.title(title)
@@ -104,3 +105,4 @@ def look_num(varlist, dataset):
         plt.xticks(rotation=45)
         
         yield
+        
